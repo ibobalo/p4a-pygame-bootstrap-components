@@ -183,6 +183,11 @@ static inline SDL_keysym *GetKeysym(SDLKey scancode, SDL_keysym *keysym)
 enum MOUSE_ACTION { MOUSE_DOWN = 0, MOUSE_UP=1, MOUSE_MOVE=2 };
 
 enum { MAX_MULTITOUCH_POINTERS = 16 };
+enum {
+	MAX_ACCELEROMETER_JOYSTICKS = 1,
+	MAX_TOUCH_JOYSTICKS = MAX_MULTITOUCH_POINTERS,
+	MAX_HARDWARE_JOYSTICKS = 4,
+};
 
 extern int SDL_android_processTouchscreenKeyboard(int x, int y, int action, int pointerId);
 

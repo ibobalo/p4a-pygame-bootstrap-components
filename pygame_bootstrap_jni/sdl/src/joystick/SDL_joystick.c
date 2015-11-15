@@ -517,8 +517,10 @@ int SDL_PrivateJoystickButton(SDL_Joystick *joystick, Uint8 button, Uint8 state)
 	}
 #endif /* !SDL_EVENTS_DISABLED */
 
-	/* Update internal joystick state */
-	joystick->buttons[button] = state;
+	if (button < joystick->nbuttons) {
+		/* Update internal joystick state */
+		joystick->buttons[button] = state;
+	}
 
 	/* Post the event, if desired */
 	posted = 0;
