@@ -108,8 +108,8 @@ JAVA_EXPORT_NAME(SDLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, jint
 
 	if( isMultitouchUsed && pointerId < nPointers)
 	{
-		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Joystick event used for private, %d<%d",
-				pointerId, nPointers);
+//		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Joystick event used for private, %d<%d",
+//				pointerId, nPointers);
 		const SDL_AndroidJoystickInfo *info = &AndroidJoysticksInfo[nAccelerometers + pointerId];
 		SDL_Joystick *joystick = info->joystick;
 		if( joystick )
@@ -123,34 +123,28 @@ JAVA_EXPORT_NAME(SDLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, jint
 			if( action == MOUSE_UP )
 				SDL_PrivateJoystickButton(joystick, 0, SDL_RELEASED);
 		}
-	}
-	else
-	{
-		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Joystick event not used for private and passed, %d>=%d",
-				pointerId, nPointers);
+//	} else {
+//		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Joystick event not used for private and passed, %d>=%d",
+//				pointerId, nPointers);
 	}
 
 	if( !isMouseUsed )
 	{
 		SDL_keysym keysym;
-		if( action != MOUSE_MOVE )
-		{
-			__android_log_print(ANDROID_LOG_INFO, "libSDL", "Redirecting mouse %s event"
-					"to key0 event.", action == MOUSE_DOWN ? "DOWN" : "UP");
+		if( action != MOUSE_MOVE ) {
+//			__android_log_print(ANDROID_LOG_INFO, "libSDL", "Redirecting mouse %s event "
+//					"to key0 event.", action == MOUSE_DOWN ? "DOWN" : "UP");
 			SDL_SendKeyboardKey( action == MOUSE_DOWN ? SDL_PRESSED : SDL_RELEASED,
 					GetKeysym(SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_KEYCODE_0)) ,&keysym) );
-		}
-		else
-		{
-			__android_log_print(ANDROID_LOG_INFO, "libSDL", "Ignoring mouse event");
+//		} else {
+//			__android_log_print(ANDROID_LOG_INFO, "libSDL", "Ignoring mouse event");
 		}
 		return;
 	}
 
-	if( action == MOUSE_DOWN || action == MOUSE_UP )
-	{
-		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Mouse %s event %d,%d",
-				(action == MOUSE_DOWN)?"DOWN":"UP", x, y);
+	if( action == MOUSE_DOWN || action == MOUSE_UP ) {
+//		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Mouse %s event %d,%d ",
+//				(action == MOUSE_DOWN)?"DOWN":"UP", x, y);
 #if SDL_VERSION_ATLEAST(1,3,0)
 		SDL_SendMouseMotion(NULL, 0, x, y);
 		SDL_SendMouseButton(NULL, (action == MOUSE_DOWN) ? SDL_PRESSED : SDL_RELEASED, 1 );
@@ -160,7 +154,7 @@ JAVA_EXPORT_NAME(SDLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, jint
 #endif
 	}
 	if( action == MOUSE_MOVE ) {
-		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Mouse move event %d,%d", x, y);
+//		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Mouse move event %d,%d", x, y);
 #if SDL_VERSION_ATLEAST(1,3,0)
 		SDL_SendMouseMotion(NULL, 0, x, y);
 #else
@@ -168,7 +162,7 @@ JAVA_EXPORT_NAME(SDLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, jint
 #endif
     }
 	if (action == MOUSE_UP) {
-		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Mouse up event");
+//		__android_log_print(ANDROID_LOG_INFO, "libSDL", "Mouse up event");
         SDL_PrivateMouseMotion(0, 0, -4096, -4096);
     }
 
